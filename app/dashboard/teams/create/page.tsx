@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowLeft, Plus, Trash, User, Users } from 'lucide-react';
-import Link from 'next/link';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowLeft, Plus, Trash, User, Users } from "lucide-react";
+import Link from "next/link";
 
 interface TeamMember {
   role: string;
@@ -13,22 +13,22 @@ interface TeamMember {
 
 export default function CreateTeamPage() {
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
+    name: "",
+    description: "",
     skills: [] as string[],
-    skillInput: '',
-    visibility: 'public',
-    members: [] as TeamMember[]
+    skillInput: "",
+    visibility: "public",
+    members: [] as TeamMember[],
   });
 
   const handleSkillInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && formData.skillInput.trim()) {
+    if (e.key === "Enter" && formData.skillInput.trim()) {
       e.preventDefault();
       if (!formData.skills.includes(formData.skillInput.trim())) {
         setFormData({
           ...formData,
           skills: [...formData.skills, formData.skillInput.trim()],
-          skillInput: ''
+          skillInput: "",
         });
       }
     }
@@ -37,14 +37,14 @@ export default function CreateTeamPage() {
   const removeSkill = (skillToRemove: string) => {
     setFormData({
       ...formData,
-      skills: formData.skills.filter(skill => skill !== skillToRemove)
+      skills: formData.skills.filter((skill) => skill !== skillToRemove),
     });
   };
 
   const addMember = () => {
     setFormData({
       ...formData,
-      members: [...formData.members, { role: '', skills: [], description: '' }]
+      members: [...formData.members, { role: "", skills: [], description: "" }],
     });
   };
 
@@ -55,9 +55,9 @@ export default function CreateTeamPage() {
   };
 
   const updateMember = (index: number, field: keyof TeamMember, value: string | string[]) => {
-    const newMembers = [...formData.members];
-    if (field === 'skills' && typeof value === 'string') {
-      newMembers[index].skills = value.split(',').map(s => s.trim());
+    const newMembers: any = [...formData.members];
+    if (field === "skills" && typeof value === "string") {
+      newMembers[index].skills = value.split(",").map((s) => s.trim());
     } else {
       newMembers[index][field] = value as string;
     }
@@ -67,18 +67,16 @@ export default function CreateTeamPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
-    console.log('Form submitted:', formData);
+    console.log("Form submitted:", formData);
   };
 
-  const inputClasses = "w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white text-gray-800 placeholder-gray-400";
+  const inputClasses =
+    "w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white text-gray-800 placeholder-gray-400";
 
   return (
     <div className="max-w-4xl mx-auto">
       <div className="flex items-center space-x-4 mb-8">
-        <Link
-          href="/dashboard/teams"
-          className="flex items-center text-gray-600 hover:text-gray-900"
-        >
+        <Link href="/dashboard/teams" className="flex items-center text-gray-600 hover:text-gray-900">
           <ArrowLeft className="h-5 w-5 mr-1" />
           Back to Teams
         </Link>
@@ -91,9 +89,7 @@ export default function CreateTeamPage() {
           {/* Basic Information */}
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Team Name
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Team Name</label>
               <input
                 type="text"
                 value={formData.name}
@@ -105,9 +101,7 @@ export default function CreateTeamPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Team Description
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Team Description</label>
               <textarea
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
@@ -121,9 +115,7 @@ export default function CreateTeamPage() {
 
           {/* Team Skills */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Team Skills
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Team Skills</label>
             <div className="flex flex-wrap gap-2 mb-2">
               {formData.skills.map((skill) => (
                 <span
@@ -153,15 +145,13 @@ export default function CreateTeamPage() {
 
           {/* Team Visibility */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Team Visibility
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Team Visibility</label>
             <div className="space-y-2">
               <label className="flex items-center">
                 <input
                   type="radio"
                   value="public"
-                  checked={formData.visibility === 'public'}
+                  checked={formData.visibility === "public"}
                   onChange={(e) => setFormData({ ...formData, visibility: e.target.value })}
                   className="h-4 w-4 text-emerald-600 focus:ring-emerald-500"
                 />
@@ -171,7 +161,7 @@ export default function CreateTeamPage() {
                 <input
                   type="radio"
                   value="private"
-                  checked={formData.visibility === 'private'}
+                  checked={formData.visibility === "private"}
                   onChange={(e) => setFormData({ ...formData, visibility: e.target.value })}
                   className="h-4 w-4 text-emerald-600 focus:ring-emerald-500"
                 />
@@ -183,9 +173,7 @@ export default function CreateTeamPage() {
           {/* Team Members */}
           <div>
             <div className="flex justify-between items-center mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Team Members
-              </label>
+              <label className="block text-sm font-medium text-gray-700">Team Members</label>
               <button
                 type="button"
                 onClick={addMember}
@@ -215,13 +203,11 @@ export default function CreateTeamPage() {
 
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Role
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
                       <input
                         type="text"
                         value={member.role}
-                        onChange={(e) => updateMember(index, 'role', e.target.value)}
+                        onChange={(e) => updateMember(index, "role", e.target.value)}
                         className={inputClasses}
                         placeholder="e.g., Frontend Developer"
                         required
@@ -229,13 +215,11 @@ export default function CreateTeamPage() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Required Skills
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Required Skills</label>
                       <input
                         type="text"
-                        value={member.skills.join(', ')}
-                        onChange={(e) => updateMember(index, 'skills', e.target.value)}
+                        value={member.skills.join(", ")}
+                        onChange={(e) => updateMember(index, "skills", e.target.value)}
                         className={inputClasses}
                         placeholder="e.g., React, TypeScript, Node.js"
                         required
@@ -243,12 +227,10 @@ export default function CreateTeamPage() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Role Description
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Role Description</label>
                       <textarea
                         value={member.description}
-                        onChange={(e) => updateMember(index, 'description', e.target.value)}
+                        onChange={(e) => updateMember(index, "description", e.target.value)}
                         className={inputClasses}
                         rows={3}
                         placeholder="Describe the responsibilities and requirements for this role..."
@@ -263,11 +245,7 @@ export default function CreateTeamPage() {
                 <div className="text-center py-8 border-2 border-dashed rounded-lg">
                   <Users className="h-8 w-8 text-gray-400 mx-auto mb-2" />
                   <p className="text-gray-600">Add team members to get started</p>
-                  <button
-                    type="button"
-                    onClick={addMember}
-                    className="mt-2 text-emerald-600 hover:text-emerald-700"
-                  >
+                  <button type="button" onClick={addMember} className="mt-2 text-emerald-600 hover:text-emerald-700">
                     Add First Member
                   </button>
                 </div>
@@ -277,16 +255,10 @@ export default function CreateTeamPage() {
 
           {/* Submit Button */}
           <div className="flex justify-end space-x-4">
-            <Link
-              href="/dashboard/teams"
-              className="px-6 py-2 border rounded-lg hover:bg-gray-50 text-gray-600"
-            >
+            <Link href="/dashboard/teams" className="px-6 py-2 border rounded-lg hover:bg-gray-50 text-gray-600">
               Cancel
             </Link>
-            <button
-              type="submit"
-              className="bg-emerald-600 text-white px-6 py-2 rounded-lg hover:bg-emerald-700"
-            >
+            <button type="submit" className="bg-emerald-600 text-white px-6 py-2 rounded-lg hover:bg-emerald-700">
               Create Team
             </button>
           </div>

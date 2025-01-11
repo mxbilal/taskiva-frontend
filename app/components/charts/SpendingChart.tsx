@@ -1,27 +1,12 @@
 "use client";
 
-import React from 'react';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import React from "react";
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
+import { Bar } from "react-chartjs-2";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export const options = {
+export const options: any = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
@@ -36,7 +21,7 @@ export const options = {
     y: {
       beginAtZero: true,
       grid: {
-        color: '#f3f4f6',
+        color: "#f3f4f6",
       },
       ticks: {
         callback: (value: number) => `$${value.toLocaleString()}`,
@@ -63,7 +48,7 @@ export function SpendingChart({ data }: SpendingChartProps) {
     datasets: [
       {
         data: data.amounts,
-        backgroundColor: '#10b981',
+        backgroundColor: "#10b981",
         borderRadius: 6,
         maxBarThickness: 40,
       },
