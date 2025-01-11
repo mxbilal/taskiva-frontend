@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --upwork-green: #14a800;
+}
+
+body {
+  @apply antialiased;
+}
+
+.text-upwork {
+  color: var(--upwork-green);
+}
+
+.bg-upwork {
+  background-color: var(--upwork-green);
+}
